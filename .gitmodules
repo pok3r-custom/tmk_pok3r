@@ -1,0 +1,9 @@
+[submodule "tmk_core"]
+	path = tmk_core
+	url = https://github.com/tmk/tmk_core.git
+[submodule "ChibiOS"]
+	path = ChibiOS
+	url = https://github.com/ChibiOS/ChibiOS.git
+[submodule "ChibiOS-Contrib"]
+	path = ChibiOS-Contrib
+	url = https://github.com/ChibiOS/ChibiOS-Contrib.git
