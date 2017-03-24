@@ -8,6 +8,7 @@ PROJECT(TMK_Pok3r C)
 SET(FILES
     README.md
 
+    Makefile
     Makefile.pok3r
     Makefile.pok3r_rgb
     Makefile.vortex_core
@@ -44,23 +45,34 @@ SET(FILES
 
     ChibiOS-Contrib/os/common/startup/ARMCMx/compilers/GCC/ld/HT32F1654.ld
     ChibiOS-Contrib/os/common/startup/ARMCMx/compilers/GCC/ld/HT32F1655.ld
-    ChibiOS-Contrib/os/common/startup/ARMCMx/compilers/GCC/mk/startup_ht32f165x.mk
-    ChibiOS-Contrib/os/common/startup/ARMCMx/devices/HT32F165x/cmparams.h
+    ChibiOS-Contrib/os/common/startup/ARMCMx/compilers/GCC/mk/startup_ht32f1654.mk
+    ChibiOS-Contrib/os/common/startup/ARMCMx/compilers/GCC/mk/startup_ht32f1655.mk
+    ChibiOS-Contrib/os/common/startup/ARMCMx/devices/HT32F1654/cmparams.h
+    ChibiOS-Contrib/os/common/startup/ARMCMx/devices/HT32F1655/cmparams.h
 
-    ChibiOS-Contrib/os/hal/ports/HT32/HT32F165x/platform.mk
-    #ChibiOS-Contrib/os/hal/ports/HT32/HT32F165x/ht32f165x.h
-    #ChibiOS-Contrib/os/hal/ports/HT32/HT32F165x/ht32f1654.h
-    #ChibiOS-Contrib/os/hal/ports/HT32/HT32F165x/ht32f1655.h
-    ChibiOS-Contrib/os/hal/ports/HT32/HT32F165x/hal_lld.h
-    ChibiOS-Contrib/os/hal/ports/HT32/HT32F165x/hal_lld.c
-    ChibiOS-Contrib/os/hal/ports/HT32/HT32F165x/hal_gpt_lld.h
-    ChibiOS-Contrib/os/hal/ports/HT32/HT32F165x/hal_gpt_lld.c
-    ChibiOS-Contrib/os/hal/ports/HT32/HT32F165x/hal_pal_lld.h
-    ChibiOS-Contrib/os/hal/ports/HT32/HT32F165x/hal_pal_lld.c
-    ChibiOS-Contrib/os/hal/ports/HT32/HT32F165x/hal_spi_lld.h
-    ChibiOS-Contrib/os/hal/ports/HT32/HT32F165x/hal_spi_lld.c
-    ChibiOS-Contrib/os/hal/ports/HT32/HT32F165x/hal_usb_lld.h
-    ChibiOS-Contrib/os/hal/ports/HT32/HT32F165x/hal_usb_lld.c
+    ChibiOS-Contrib/os/hal/ports/HT32/HT32F1654/platform.mk
+    ChibiOS-Contrib/os/hal/ports/HT32/HT32F1655/platform.mk
+
+    ChibiOS-Contrib/os/hal/ports/HT32/LLD/hal_lld.h
+    ChibiOS-Contrib/os/hal/ports/HT32/LLD/hal_lld.c
+    ChibiOS-Contrib/os/hal/ports/HT32/LLD/hal_gpt_lld.h
+    ChibiOS-Contrib/os/hal/ports/HT32/LLD/hal_gpt_lld.c
+    ChibiOS-Contrib/os/hal/ports/HT32/LLD/hal_pal_lld.h
+    ChibiOS-Contrib/os/hal/ports/HT32/LLD/hal_pal_lld.c
+    ChibiOS-Contrib/os/hal/ports/HT32/LLD/hal_spi_lld.h
+    ChibiOS-Contrib/os/hal/ports/HT32/LLD/hal_spi_lld.c
+    ChibiOS-Contrib/os/hal/ports/HT32/LLD/hal_st_lld.h
+    ChibiOS-Contrib/os/hal/ports/HT32/LLD/hal_st_lld.c
+    ChibiOS-Contrib/os/hal/ports/HT32/LLD/hal_usb_lld.h
+    ChibiOS-Contrib/os/hal/ports/HT32/LLD/hal_usb_lld.c
+)
+
+INCLUDE_DIRECTORIES(
+    .
+    boards/VORTEX_DUAL_60
+    ChibiOS-Contrib/os/common/ext/CMSIS/HT32F165x
+    ChibiOS-Contrib/os/common/startup/ARMCMx/devices/HT32F1654
+    ChibiOS-Contrib/os/hal/ports/HT32/LLD
 )
 
 ### =================== BUILD =================== ###
@@ -69,7 +81,8 @@ ADD_CUSTOM_TARGET(tmk-pok3r-dummy SOURCES ${FILES})
 
 ADD_CUSTOM_TARGET(firmware ALL
     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-    COMMAND make -f Makefile.pok3r
+    COMMAND make
+    #COMMAND make -f Makefile.pok3r
     #COMMAND make -f Makefile.pok3r_rgb
     #COMMAND make -f Makefile.vortex_core
 )

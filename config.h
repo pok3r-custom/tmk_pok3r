@@ -9,7 +9,7 @@
 #define MANUFACTURER        "TMK"
 #define USBSTR_MANUFACTURER 'T','\x00', 'M','\x00', 'K','\x00', ' ','\x00', '\xc6','\x00'
 #define PRODUCT             "POK3R/TMK"
-#define USBSTR_PRODUCT      'P,'\x00', 'O','\x00', 'K','\x00', '3','\x00', 'R','\x00', '/','\x00', 'T','\x00', 'M','\x00', 'K','\x00'
+#define USBSTR_PRODUCT      'P','\x00', 'O','\x00', 'K','\x00', '3','\x00', 'R','\x00', '/','\x00', 'T','\x00', 'M','\x00', 'K','\x00'
 
 /* key matrix size */
 #define MATRIX_ROWS 9

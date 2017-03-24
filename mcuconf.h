@@ -17,7 +17,7 @@
 #ifndef _MCUCONF_H_
 #define _MCUCONF_H_
 
-#define K20x_MCUCONF
+#define HT32_MCUCONF
 
 /*
  * HAL driver system settings.
@@ -25,31 +25,29 @@
 
 /* Select the MCU clocking mode below by enabling the appropriate block. */
 
-#define KINETIS_NO_INIT             FALSE
+//#define KINETIS_NO_INIT             FALSE
 
-/* FEI mode - 48 MHz with internal 32.768 kHz crystal */
-#define KINETIS_MCG_MODE            KINETIS_MCG_MODE_FEI
-#define KINETIS_MCG_FLL_DMX32       1           /* Fine-tune for 32.768 kHz */
-#define KINETIS_MCG_FLL_DRS         1           /* 1464x FLL factor */
-#define KINETIS_SYSCLK_FREQUENCY    47972352UL  /* 32.768 kHz * 1464 (~48 MHz) */
-#define KINETIS_CLKDIV1_OUTDIV1     1
-#define KINETIS_CLKDIV1_OUTDIV2     1
-#define KINETIS_CLKDIV1_OUTDIV4     2
-#define KINETIS_BUSCLK_FREQUENCY    KINETIS_SYSCLK_FREQUENCY
-#define KINETIS_FLASHCLK_FREQUENCY  KINETIS_SYSCLK_FREQUENCY/2
+// External 8MHz crystal with internal PLL for 72MHz system clock
+#define HT32_HSE_FREQUENCY          8000000UL                                   // 8 MHz
+#define HT32_PLL_FBDIV              18
+#define HT32_CK_SYS_FREQUENCY       HT32_HSE_FREQUENCY * HT32_PLL_FBDIV         // 144 MHz
+#define HT32_AHB_PRESCALER          2
+#define HT32_CK_AHB_FREQUENCY       HT32_CK_SYS_FREQUENCY / HT32_AHB_PRESCALER  // 72 MHz
+#define HT32_STCLK_FREQUENCY        HT32_CK_AHB_FREQUENCY / 8                   // 9 MHz
 
 /*
  * SERIAL driver system settings.
  */
-#define KINETIS_SERIAL_USE_UART0            TRUE
+//#define KINETIS_SERIAL_USE_UART0            TRUE
 
 /*
  * USB driver settings
  */
-#define KINETIS_USB_USE_USB0                TRUE
+#define HT32_USB_USE_USB1                   TRUE
+
 /* Need to redefine this, since the default is for K20x */
 /* This is for Teensy LC; you should comment it out (or change to 5)
  * for Teensy 3.x */
-#define KINETIS_USB_USB0_IRQ_PRIORITY       2
+//#define KINETIS_USB_USB0_IRQ_PRIORITY       2
 
 #endif /* _MCUCONF_H_ */
