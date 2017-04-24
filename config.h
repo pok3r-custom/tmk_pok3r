@@ -7,9 +7,10 @@
 #define DEVICE_VER      0x0001
 
 #define MANUFACTURER        "TMK"
-#define USBSTR_MANUFACTURER 'T','\x00', 'M','\x00', 'K','\x00', ' ','\x00', '\xc6','\x00'
+#define USBSTR_MANUFACTURER 'T','\x00', 'M','\x00', 'K','\x00', ' ','\x00'
 #define PRODUCT             "POK3R/TMK"
-#define USBSTR_PRODUCT      'P','\x00', 'O','\x00', 'K','\x00', '3','\x00', 'R','\x00', '/','\x00', 'T','\x00', 'M','\x00', 'K','\x00'
+#define USBSTR_PRODUCT      'P','\x00', 'O','\x00', 'K','\x00', '3','\x00', 'R','\x00', ' ','\x00'
+#define DESCRIPTION         "Vortex POK3R with TMK"
 
 /* key matrix size */
 #define MATRIX_ROWS 9
@@ -17,6 +18,10 @@
 
 /* define if matrix has ghost */
 //#define MATRIX_HAS_GHOST
+
+// features
+//#define NKRO_ENABLE
+//#define MOUSE_ENABLE
 
 /* Set 0 if debouncing isn't needed */
 #define DEBOUNCE    5

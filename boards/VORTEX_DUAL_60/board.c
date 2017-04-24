@@ -14,7 +14,20 @@
     limitations under the License.
 */
 
+#include "ch.h"
 #include "hal.h"
+
+#if HAL_USE_PAL || defined(__DOXYGEN__)
+/**
+ * @brief   PAL setup.
+ * @details Digital I/O ports static configuration as defined in @p board.h.
+ *          This variable is used by the HAL when initializing the PAL driver.
+ */
+const PALConfig pal_default_config = {
+
+};
+
+#endif
 
 /**
  * @brief   Board-specific initialization code.

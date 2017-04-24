@@ -17,13 +17,13 @@
 #ifndef _MCUCONF_H_
 #define _MCUCONF_H_
 
+#include "nvic.h"
+
 #define HT32_MCUCONF
 
 /*
  * HAL driver system settings.
  */
-
-/* Select the MCU clocking mode below by enabling the appropriate block. */
 
 //#define KINETIS_NO_INIT             FALSE
 
@@ -36,18 +36,10 @@
 #define HT32_STCLK_FREQUENCY        HT32_CK_AHB_FREQUENCY / 8                   // 9 MHz
 
 /*
- * SERIAL driver system settings.
- */
-//#define KINETIS_SERIAL_USE_UART0            TRUE
-
-/*
  * USB driver settings
  */
-#define HT32_USB_USE_USB1                   TRUE
 
-/* Need to redefine this, since the default is for K20x */
-/* This is for Teensy LC; you should comment it out (or change to 5)
- * for Teensy 3.x */
-//#define KINETIS_USB_USB0_IRQ_PRIORITY       2
+#define HT32_USB_USE_USB0                   TRUE
+//#define HT32_USB_USB0_IRQ_PRIORITY          5
 
 #endif /* _MCUCONF_H_ */
