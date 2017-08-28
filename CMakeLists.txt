@@ -50,9 +50,6 @@ SET(FILES
     ChibiOS-Contrib/os/common/startup/ARMCMx/devices/HT32F1654/cmparams.h
     ChibiOS-Contrib/os/common/startup/ARMCMx/devices/HT32F1655/cmparams.h
 
-    ChibiOS-Contrib/os/hal/ports/HT32/HT32F1654/platform.mk
-    ChibiOS-Contrib/os/hal/ports/HT32/HT32F1655/platform.mk
-
     ChibiOS-Contrib/os/hal/ports/HT32/LLD/hal_lld.h
     ChibiOS-Contrib/os/hal/ports/HT32/LLD/hal_lld.c
     ChibiOS-Contrib/os/hal/ports/HT32/LLD/hal_gpt_lld.h
@@ -65,19 +62,34 @@ SET(FILES
     ChibiOS-Contrib/os/hal/ports/HT32/LLD/hal_st_lld.c
     ChibiOS-Contrib/os/hal/ports/HT32/LLD/hal_usb_lld.h
     ChibiOS-Contrib/os/hal/ports/HT32/LLD/hal_usb_lld.c
+
+    ChibiOS-Contrib/os/hal/ports/HT32/HT32F1654/platform.mk
+    ChibiOS-Contrib/os/hal/ports/HT32/HT32F1655/platform.mk
+    ChibiOS-Contrib/os/hal/ports/HT32/HT32F1655/ht32_registry.h
 )
 
 INCLUDE_DIRECTORIES(
     .
     boards/VORTEX_DUAL_60
+    ChibiOS/os/hal/include
+    ChibiOS/os/common/ports/ARMCMx
+    ChibiOS/os/hal/include
+    ChibiOS/os/hal/osal/rt
+    ChibiOS/os/rt/include
     ChibiOS-Contrib/os/common/ext/CMSIS/HT32F165x
-    ChibiOS-Contrib/os/common/startup/ARMCMx/devices/HT32F1654
+    ChibiOS-Contrib/os/common/ports/ARMCMx
+    ChibiOS-Contrib/os/common/startup/ARMCMx/devices/HT32F1655
+    ChibiOS-Contrib/os/hal/include
+    ChibiOS-Contrib/os/hal/osal/rt
+    ChibiOS-Contrib/os/rt/include
     ChibiOS-Contrib/os/hal/ports/HT32/LLD
 )
 
+
 ### =================== BUILD =================== ###
 
-ADD_CUSTOM_TARGET(tmk-pok3r-dummy SOURCES ${FILES})
+ADD_EXECUTABLE(tmk-pok3r-dummy EXCLUDE_FROM_ALL ${FILES})
+#ADD_CUSTOM_TARGET(tmk-pok3r-dummy SOURCES ${FILES})
 
 ADD_CUSTOM_TARGET(firmware ALL
     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
