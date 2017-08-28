@@ -1,7 +1,7 @@
 ## TMK-Pok3r CMakeLists.txt
 CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
 
-PROJECT(TMK_Pok3r C)
+PROJECT(TMK_Pok3r NONE)
 
 ### =================== SOURCES =================== ###
 
@@ -50,6 +50,12 @@ SET(FILES
     ChibiOS-Contrib/os/common/startup/ARMCMx/devices/HT32F1654/cmparams.h
     ChibiOS-Contrib/os/common/startup/ARMCMx/devices/HT32F1655/cmparams.h
 
+    ChibiOS-Contrib/os/hal/ports/HT32/HT32F1654/platform.mk
+    #ChibiOS-Contrib/os/hal/ports/HT32/HT32F1654/ht32_registry.h
+
+    ChibiOS-Contrib/os/hal/ports/HT32/HT32F1655/platform.mk
+    ChibiOS-Contrib/os/hal/ports/HT32/HT32F1655/ht32_registry.h
+
     ChibiOS-Contrib/os/hal/ports/HT32/LLD/hal_lld.h
     ChibiOS-Contrib/os/hal/ports/HT32/LLD/hal_lld.c
     ChibiOS-Contrib/os/hal/ports/HT32/LLD/hal_gpt_lld.h
@@ -60,12 +66,15 @@ SET(FILES
     ChibiOS-Contrib/os/hal/ports/HT32/LLD/hal_spi_lld.c
     ChibiOS-Contrib/os/hal/ports/HT32/LLD/hal_st_lld.h
     ChibiOS-Contrib/os/hal/ports/HT32/LLD/hal_st_lld.c
+    ChibiOS-Contrib/os/hal/ports/HT32/LLD/hal_uart_lld.h
+    ChibiOS-Contrib/os/hal/ports/HT32/LLD/hal_uart_lld.c
     ChibiOS-Contrib/os/hal/ports/HT32/LLD/hal_usb_lld.h
     ChibiOS-Contrib/os/hal/ports/HT32/LLD/hal_usb_lld.c
 
-    ChibiOS-Contrib/os/hal/ports/HT32/HT32F1654/platform.mk
-    ChibiOS-Contrib/os/hal/ports/HT32/HT32F1655/platform.mk
-    ChibiOS-Contrib/os/hal/ports/HT32/HT32F1655/ht32_registry.h
+    tmk_core/common/command.c
+    tmk_core/common/eeconfig.h
+    tmk_core/common/chibios/eeconfig.c
+    tmk_core/protocol/chibios/usb_main.c
 )
 
 INCLUDE_DIRECTORIES(
@@ -81,8 +90,9 @@ INCLUDE_DIRECTORIES(
     ChibiOS-Contrib/os/common/startup/ARMCMx/devices/HT32F1655
     ChibiOS-Contrib/os/hal/include
     ChibiOS-Contrib/os/hal/osal/rt
-    ChibiOS-Contrib/os/rt/include
+    ChibiOS-Contrib/os/hal/ports/HT32/HT32F1655
     ChibiOS-Contrib/os/hal/ports/HT32/LLD
+    ChibiOS-Contrib/os/rt/include
 )
 
 
@@ -93,7 +103,7 @@ ADD_EXECUTABLE(tmk-pok3r-dummy EXCLUDE_FROM_ALL ${FILES})
 
 ADD_CUSTOM_TARGET(firmware ALL
     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-    COMMAND make
+    COMMAND make pok3r
     #COMMAND make -f Makefile.pok3r
     #COMMAND make -f Makefile.pok3r_rgb
     #COMMAND make -f Makefile.vortex_core

@@ -25,7 +25,7 @@
  * Board identifier.
  */
 #define BOARD_GENERIC
-#define BOARD_NAME                  "Generic Board"
+#define BOARD_NAME                  "CYKB175_V03"
 
 #if !defined(_FROM_ASM_)
 #ifdef __cplusplus
