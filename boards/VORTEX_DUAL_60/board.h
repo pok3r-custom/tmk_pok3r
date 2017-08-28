@@ -25,7 +25,7 @@
  * Board identifier.
  */
 #define BOARD_GENERIC
-#define BOARD_NAME                  "Generic Board"
+#define BOARD_NAME                  "VORTEX_DUAL_60"
 
 #if !defined(_FROM_ASM_)
 #ifdef __cplusplus
