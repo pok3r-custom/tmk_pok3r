@@ -1,11 +1,16 @@
 [submodule "tmk_core"]
     path = tmk_core
     #url = https://github.com/tmk/tmk_core.git
-    url = ssh://veralez/git/tmk_core.git
+    #url = ssh://veralez/git/tmk_core.git
+    url = https://github.com/ChaoticConundrum/tmk_core.git
+
 [submodule "ChibiOS"]
     path = ChibiOS
     url = https://github.com/ChibiOS/ChibiOS.git
+
 [submodule "ChibiOS-Contrib"]
     path = ChibiOS-Contrib
     #url = https://github.com/ChibiOS/ChibiOS-Contrib.git
-    url = ssh://veralez/git/ChibiOS-Contrib.git
+    #url = ssh://veralez/git/ChibiOS-Contrib.git
+    url = https://github.com/ChaoticConundrum/ChibiOS-Contrib.git
+
