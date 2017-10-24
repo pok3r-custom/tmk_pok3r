@@ -1,5 +1,8 @@
-*.user
-
 build
 .dep
+
+*.user
+*.user.*
+
+*.swp
 
