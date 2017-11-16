@@ -1,7 +1,7 @@
 ## TMK-Pok3r CMakeLists.txt
 CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
 
-PROJECT(TMK_Pok3r NONE)
+PROJECT(TMK_POK3R NONE)
 
 ### =================== SOURCES =================== ###
 
@@ -9,9 +9,10 @@ SET(FILES
     README.md
 
     Makefile
-    Makefile.pok3r
-    Makefile.pok3r_rgb
-    Makefile.vortex_core
+    Makefile.app_pok3r
+    Makefile.tmk_pok3r
+    Makefile.tmk_pok3r_rgb
+    Makefile.tmk_vortex_core
 
     chconf.h
     config.h
@@ -98,8 +99,8 @@ INCLUDE_DIRECTORIES(
 
 ### =================== BUILD =================== ###
 
-ADD_EXECUTABLE(tmk-pok3r-dummy EXCLUDE_FROM_ALL ${FILES})
-#ADD_CUSTOM_TARGET(tmk-pok3r-dummy SOURCES ${FILES})
+#ADD_EXECUTABLE(tmk-pok3r-dummy EXCLUDE_FROM_ALL ${FILES})
+ADD_CUSTOM_TARGET(tmk-pok3r-dummy SOURCES ${FILES})
 
 ADD_CUSTOM_TARGET(firmware ALL
     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
