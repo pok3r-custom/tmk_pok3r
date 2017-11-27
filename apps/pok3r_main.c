@@ -291,7 +291,7 @@ void spi_read(void){
 
 #define VERSION_ADDR 0x2800
 
-void flash_version_clear(){
+void flash_version_clear(void){
     FMC->TADR.TADB = VERSION_ADDR;
     FMC->OCMR.CMD = OCMR_PAGE_ERASE;
     FMC->OPCR.OPM = OPCR_COMMIT;
@@ -340,9 +340,9 @@ int main(void){
 //    spi_read();
 
     usart_init();
-    
+
     usart_log("POK3R Boot");
-    
+
     usart_log("TEST");
 
     // USB
