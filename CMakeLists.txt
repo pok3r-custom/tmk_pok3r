@@ -24,6 +24,9 @@ SET(FILES
 
     led_pok3r.c
     matrix_pok3r.c
+    
+    apps/gd25q_flash.h
+    apps/pok3r_main.c
 
     boards/VORTEX_DUAL_60/board.mk
     boards/VORTEX_DUAL_60/board.h

@@ -327,8 +327,11 @@ void usart_log(const char *str){
 }
 
 int main(void){
+    // HAL Init
+    halInit();
+    
     // Clear the version so the board resets to the bootloader
-//    flash_version_clear();
+    flash_version_clear();
 
     // I/O init
     afio_init();
