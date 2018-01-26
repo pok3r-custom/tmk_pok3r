@@ -27,6 +27,7 @@ SET(FILES
     
     apps/gd25q_flash.h
     apps/pok3r_main.c
+    apps/app.sym
 
     boards/VORTEX_DUAL_60/board.mk
     boards/VORTEX_DUAL_60/board.h
