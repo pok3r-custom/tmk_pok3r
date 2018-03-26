@@ -27,6 +27,8 @@
 #define BOARD_GENERIC
 #define BOARD_NAME                  "VORTEX_DUAL_60"
 
+#define HT32F1655
+
 #if !defined(_FROM_ASM_)
 #ifdef __cplusplus
 extern "C" {

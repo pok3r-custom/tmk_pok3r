@@ -25,21 +25,25 @@
  * HAL driver system settings.
  */
 
-//#define KINETIS_NO_INIT             FALSE
-
 // External 8MHz crystal with internal PLL for 72MHz system clock
 #define HT32_HSE_FREQUENCY          8000000UL                                   // 8 MHz
 #define HT32_PLL_FBDIV              18
 #define HT32_CK_SYS_FREQUENCY       HT32_HSE_FREQUENCY * HT32_PLL_FBDIV         // 144 MHz
 #define HT32_AHB_PRESCALER          2
 #define HT32_CK_AHB_FREQUENCY       HT32_CK_SYS_FREQUENCY / HT32_AHB_PRESCALER  // 72 MHz
-#define HT32_STCLK_FREQUENCY        HT32_CK_AHB_FREQUENCY / 8                   // 9 MHz
+#define HT32_USB_PRESCALER          3
+
+#if defined(HT32F1656)
+    #define HT32_STCLK_FREQUENCY        HT32_CK_AHB_FREQUENCY / 1                   // 72 MHz
+#else
+    #define HT32_STCLK_FREQUENCY        HT32_CK_AHB_FREQUENCY / 1                   // 9 MHz
+#endif
 
 /*
  * USB driver settings
  */
 
 #define HT32_USB_USE_USB0                   TRUE
-//#define HT32_USB_USB0_IRQ_PRIORITY          5
+#define HT32_USB_USB0_IRQ_PRIORITY          5
 
 #endif /* _MCUCONF_H_ */

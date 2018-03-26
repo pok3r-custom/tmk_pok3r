@@ -4,9 +4,6 @@
 
 #include "gd25q_flash.h"
 
-#define MIN(A, B) (A < B ? A : B)
-#define MAX(A, B) (A > B ? A : B)
-
 // CKCU Clocks
 // /////////////////////////////////////////////////////////////////////////////
 #define TYPE_AHB        (1 << 28)
@@ -55,13 +52,11 @@
 #define GPIO_B_ID       1
 #define GPIO_C_ID       2
 #define GPIO_D_ID       3
-#define GPIO_E_ID       4
 
 #define CLOCK_PA        TYPE_AHB | (1 << 16)
 #define CLOCK_PB        TYPE_AHB | (1 << 17)
 #define CLOCK_PC        TYPE_AHB | (1 << 18)
 #define CLOCK_PD        TYPE_AHB | (1 << 19)
-#define CLOCK_PE        TYPE_AHB | (1 << 20)
 
 typedef uint32_t u32;
 typedef uint8_t u8;
@@ -194,7 +189,7 @@ void afio_init(void){
     afio_pin_config(GPIO_C_ID, 15, AFIO_GPIO);
 
     // check HSEEN
-    if(CKCU->GCCR & CKCU_GCCR_HSEEN == 0){
+    if(CKCU->GCCR.HSEEN == 0){
         afio_pin_config(GPIO_B_ID, 14, AFIO_GPIO);
         afio_pin_config(GPIO_B_ID, 15, AFIO_GPIO);
     }
@@ -243,35 +238,33 @@ void spi_init(void){
     afio_pin_config(GPIO_B_ID, 8, 5);
     afio_pin_config(GPIO_B_ID, 9, 5);
 
-    //SPI1->CR1.SELM = 0;     // software chip select
-    //SPI1->CR1.SELAP = 0;    // active low
+    SPI1->SPICR1.SELM = 0;     // software chip select
+    SPI1->SPICR1.SELAP = 0;    // active low
 
-    SPI1->CR1 =
-            8 |                     // 8 bits
-            SPI_CR1_FORMAT_MODE0 |  // clock low, first edge
-            SPI_CR1_MODE;           // master mode
+    SPI1->SPICR1.DFL = 8;      // 8 bits
+    SPI1->SPICR1.FORMAT = 1;   // clock low, first edge
+    SPI1->SPICR1.FIRSTBIT = 0; // msb first
+    SPI1->SPICR1.MODE = 1;     // master mode
 
-    SPI1->CPR = 1;       // prescaler
+    SPI1->SPICPR.CP = 1;       // prescaler
 
-    SPI1->FCR =
-            SPI_FCR_FIFOEN |    // fifo enable
-            4 << 4 |            // rx fifo trigger level
-            4 << 0;             // tx fifo trigger level
+    SPI1->SPIFCR.FIFOEN = 1;   // fifo enable
+    SPI1->SPIFCR.RXFTLS = 4;
+    SPI1->SPIFCR.TXFTLS = 4;
 
-    SPI1->CR0 =
-            SPI_CR0_SELOEN |    // chip select output
-            SPI_CR0_SPIEN;      // enable
+    SPI1->SPICR0.SELOEN = 1;   // chip select output
+    SPI1->SPICR0.SPIEN = 1;    // enable
 }
 
 u8 spi_txrx(u8 byte){
     // wait for tx empty
-    while((SPI1->SR & SPI_SR_TXBE) == 0);
+    while(SPI1->SPISR.TXBE == 0);
     // send byte
-    SPI1->DR = byte;
+    SPI1->SPIDR.DR = byte;
     // wait for rx data
-    while((SPI1->SR & SPI_SR_RXBNE) == 0);
+    while(SPI1->SPISR.RXBNE == 0);
     // recv byte
-    u32 data = SPI1->DR;
+    u32 data = SPI1->SPIDR.DR;
     return data & 0xFF;
 }
 
@@ -294,14 +287,14 @@ void spi_flash_command(const u8 *cmd, int writelen, u8 *out, int readlen){
         int len = MIN(writelen - wlen, 8);
         // Send command bytes
         for(int i = 0; i < len; ++i){
-            SPI1->DR = cmd[wlen++];
+            SPI1->SPIDR.word = cmd[wlen++];
         }
         // Read dummy data
         for(int i = 0; i < len; ++i){
             // wait for recv data
-            while((SPI1->FSR & SPI_FSR_RXFS_MASK) == 0);
+            while(SPI1->SPIFSR.RXFS == 0);
             // read/discard data
-            SPI1->DR;  // this only works in C
+            SPI1->SPIDR.word;  // this only works in C
         }
     }
 
@@ -310,14 +303,14 @@ void spi_flash_command(const u8 *cmd, int writelen, u8 *out, int readlen){
         int len = MIN(readlen - rlen, 8);
         // Send dummy bytes
         for(int i = 0; i < len; ++i){
-            SPI1->DR = 0;
+            SPI1->SPIDR.word = 0;
         }
         // Read data
         for(int i = 0; i < len; ++i){
             // wait for recv data
-            while((SPI1->FSR & SPI_FSR_RXFS_MASK) == 0);
+            while(SPI1->SPIFSR.RXFS == 0);
             // read data
-            u32 data = SPI1->DR;
+            u32 data = SPI1->SPIDR.word;
             out[rlen++] = data & 0xFF;
         }
     }
@@ -356,30 +349,30 @@ void spi_read(void){
 #define VERSION_ADDR 0x2800
 
 void flash_version_clear(void){
-    FMC->TADR = VERSION_ADDR;
-    FMC->OCMR = FMC_OCMR_CMD_PAGE_ERASE;
-    FMC->OPCR = FMC_OPCR_OPM_COMMIT;
+    FMC->TADR.TADB = VERSION_ADDR;
+    FMC->OCMR.CMD = OCMR_PAGE_ERASE;
+    FMC->OPCR.OPM = OPCR_COMMIT;
 
-    while(FMC->OPCR != FMC_OPCR_OPM_FINISHED);
+    while(FMC->OPCR.OPM != OPCR_FINISHED);
 }
 
 void usart_init(void){
     // USART0 clock
     ckcu_clock_enable(CLOCK_USR0, 1);
 
-    USART0->MDR = USART_MDR_MODE_NORMAL;   // normal operation
-    USART0->DLR = 625;  // 115200 baud
-    USART0->LCR = USART_LCR_WLS_8BIT; // 8 bits
-    //USART0->LCR.PBE = 0;    // no parity
-    //USART0->LCR.NSB = 0;    // 1 stop bit
-    USART0->FCR &= ~USART_FCR_URRXEN; // RX disable
-    USART0->FCR |= USART_FCR_URTXEN; // TX enable
+    USART0->MDR.MODE = 0;   // normal operation
+    USART0->DLR.BRD = 625;  // 115200 baud
+    USART0->LCR.WLS = 1;    // 8 bits
+    USART0->LCR.PBE = 0;    // no parity
+    USART0->LCR.NSB = 0;    // 1 stop bit
+    USART0->FCR.URRXEN = 0; // RX disable
+    USART0->FCR.URTXEN = 1; // TX enable
 }
 
 void usart_write(const u8 *data, u32 size){
     while(size > 0){
-        USART0->TBR = *data;         // write fifo
-        while(!(USART0->LSR & USART_LSR_TXEMPT));   // wait while tx not empty
+        USART0->TBR.TD = *data;         // write fifo
+        while(!(USART0->LSR.TXEMPT));   // wait while tx not empty
         data++;
         size--;
     }
@@ -405,7 +398,7 @@ int main(void){
 
     usart_init();
 
-    usart_log("POK3R Boot");
+    usart_log("Vortex CORE Boot");
 
     usart_log("TEST");
 

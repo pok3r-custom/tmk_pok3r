@@ -1,0 +1,79 @@
+
+[code]
+
+* 2c04: reset
+* 2c08: nmi
+* 2c0c: hard_fault
+* 2c10: mcu_fault
+* 2c14: bus_fault
+* 2c18: usage_fault
+
+* 2c2c: svccall_intr
+* 2c30: debug_intr
+
+* 2c38: pendsv_intr
+* 2c3c: systick_intr
+* 2c40
+* 2c44
+* 2c48
+* 2c4c
+* 2c50
+* 2c54
+* 2c58
+* 2c5c
+* 2c60
+* 2c64
+* 2c68
+* 2c6c
+* 2c70
+* 2c74
+* 2c78
+* 2c7c
+* 2c80
+* 2c84
+* 2c88
+* 2c8c
+* 2c90
+* 2c94
+* 2c98
+* 2c9c
+* 2ca0
+* 2ca4
+
+* 2cac
+* 2cb0
+* 2cb4
+* 2cb8
+* 2cbc
+* 2cc0
+* 2cc4
+* 2cc8
+* 2ccc
+* 2cd0
+
+* 2ce4
+* 2ce8
+* 2cec
+* 2cf0
+* 2cf4
+* 2cf8
+* 2cfc
+* 2d00
+* 2d04
+* 2d08
+* 2d0c
+* 2d10
+* 2d14: usb_intr
+
+* 2d1c
+* 2d20
+* 2d24
+* 2d28
+* 2d2c
+* 2d30
+* 2d34
+* 2d38
+
+* 2d50
+
+[data]

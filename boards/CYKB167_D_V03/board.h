@@ -27,6 +27,8 @@
 #define BOARD_GENERIC
 #define BOARD_NAME                  "CYKB167_D_V03"
 
+#define HT32F1654
+
 #if !defined(_FROM_ASM_)
 #ifdef __cplusplus
 extern "C" {

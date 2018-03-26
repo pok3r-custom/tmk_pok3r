@@ -24,7 +24,7 @@ CONFIG_H = config.h
 # - the next two should match the directories in
 #   <chibios>/os/hal/ports/$(MCU_FAMILY)/$(MCU_SERIES)
 MCU_FAMILY = HT32
-MCU_SERIES = HT32F1655
+MCU_SERIES = HT32F165x
 
 # Linker script to use
 # - it should exist either in <chibios>/os/common/ports/ARMCMx/compilers/GCC/ld/
@@ -33,7 +33,7 @@ MCU_LDSCRIPT = HT32F1655
 
 # Startup code to use
 #  - it should exist in <chibios>/os/common/ports/ARMCMx/compilers/GCC/mk/
-MCU_STARTUP = ht32f1655
+MCU_STARTUP = ht32f165x
 
 # Board: it should exist either in <chibios>/os/hal/boards/
 #  or <this_dir>/boards
