@@ -1,8 +1,14 @@
-build
+# Build Files
 .dep
+build
+util/FlashLoader_HT32/Output
 
+# Editor Files
+*.swp
+
+# IDE Files
 *.user
 *.user.*
-
-*.swp
+util/FlashLoader_HT32/*.emSession
+util/FlashLoader_HT32/*.jlink
 
