@@ -5,6 +5,7 @@ util/jlink_flashloader/FlashLoader_HT32/Output
 
 # Editor Files
 *.swp
+*.kate-swp
 
 # IDE Files
 *.user

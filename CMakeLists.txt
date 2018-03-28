@@ -9,11 +9,11 @@ SET(FILES
     README.md
 
     Makefile
-    Makefile.app_pok3r
-    Makefile.app_vortex_core
-    Makefile.tmk_pok3r
-    Makefile.tmk_pok3r_rgb
-    Makefile.tmk_vortex_core
+    util/Makefile.app_pok3r
+    util/Makefile.app_vortex_core
+    util/Makefile.tmk_pok3r
+    util/Makefile.tmk_pok3r_rgb
+    util/Makefile.tmk_vortex_core
 
     chconf.h
     config.h
