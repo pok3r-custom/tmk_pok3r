@@ -89,7 +89,6 @@ INCLUDE_DIRECTORIES(
     .
     boards/VORTEX_DUAL_60
     #boards/CYKB175_V03
-    ChibiOS/os/hal/include
     ChibiOS/os/common/ports/ARMCMx
     ChibiOS/os/hal/include
     ChibiOS/os/hal/osal/rt
