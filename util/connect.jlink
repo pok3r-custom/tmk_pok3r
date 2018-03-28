@@ -1,0 +1,8 @@
+
+si SWD
+speed 4000
+connect
+rsettype 2
+
+mem32 0 4
+
