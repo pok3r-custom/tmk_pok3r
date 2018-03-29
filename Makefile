@@ -33,3 +33,8 @@ pok3r_bootloader:
 	JLinkExe -Device HT32F1655 -CommanderScript util/flash.jlink
 	rm .tmp.bin
 
+pok3r_qmk:
+	cp ../qmk_firmware/pok3r_default.bin .tmp.bin
+	JLinkExe -Device HT32F1655 -CommanderScript util/flash.jlink
+	rm .tmp.bin
+

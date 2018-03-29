@@ -4,7 +4,7 @@ speed 4000
 connect
 rsettype 2
 
-loadbin .tmp.bin 0
+loadbin .tmp.bin 0x2c00
 r
 
 q
