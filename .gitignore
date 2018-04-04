@@ -13,4 +13,5 @@ util/jlink_flashloader/FlashLoader_HT32/Output
 *.user.*
 util/jlink_flashloader/FlashLoader_HT32/*.emSession
 util/jlink_flashloader/FlashLoader_HT32/*.jlink
+*.jdebug
 

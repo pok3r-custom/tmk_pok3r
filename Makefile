@@ -26,15 +26,16 @@ vortex_core: app_vortex_core tmk_vortex_core
 all: pok3r pok3r_rgb vortex_core
 
 jlink:
-	JLinkExe -Device HT32F1655 -CommanderScript util/connect.jlink
+	JLinkExe -Device HT32F1654 -CommanderScript util/connect.jlink
+	#JLinkExe -Device HT32F1655 -CommanderScript util/connect.jlink
 
 pok3r_bootloader:
 	cp ../pok3r/disassemble/pok3r/builtin/firmware_builtin.bin .tmp.bin
 	JLinkExe -Device HT32F1655 -CommanderScript util/flash.jlink
 	rm .tmp.bin
 
-pok3r_qmk:
-	cp ../qmk_firmware/pok3r_default.bin .tmp.bin
-	JLinkExe -Device HT32F1655 -CommanderScript util/flash.jlink
+core_bootloader:
+	cp ../pok3r/disassemble/vortex_core/builtin_core/firmware_builtin_core.bin .tmp.bin
+	JLinkExe -Device HT32F1654 -CommanderScript util/flash.jlink
 	rm .tmp.bin
 
